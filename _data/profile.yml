@@ -3,7 +3,7 @@ secondary_name: ""
 navbar_name: "Yuanting Fan"
 
 positions:
-- name: Position without logo
+# - name: Position without logo
 - logo: /assets/images/badges/xjtu_red.png
   name: MSE, Xi'an Jiaotong University (2022)
 
@@ -11,7 +11,7 @@ email: "retofan@stu.xjtu.edu.cn"
 # cv_link: link-to-your-cv-file
 gscholar: SD4CZKAAAAAJ
 github: RetoFan233
-twitter: your_twitter_id
+# twitter: your_twitter_id
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
 #   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
@@ -19,17 +19,20 @@ twitter: your_twitter_id
 # orcid: 0000-0000-0000-0000
 
 short_bio: >-
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+  The student of Xi'an Jiaotong University. Major in Computer Vision; Super-Resolution; Generative Models; Multimodal Large Language Model; Anomaly Detection.
 
 portrait_url: /assets/images/photos/portrait.jpg
-portrait_caption: >-
-  Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
+# portrait_caption: >-
+#   Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
 
 education:
-- name: Chang'an University
+- name: Xi'an Jiaotong University
   logo: /assets/images/badges/xjtu_red.png
+  position: MSE in Software Engineering
+  date: Sep. 2022 - Jul. 2025
+
+- name: Chang'an University
+  logo: /assets/images/badges/chd_blue.jpg
   position: B.S. in Software Engineering
   date: Sep. 2018 - Jul. 2022
 
@@ -40,10 +43,10 @@ education:
 #   date: Sep. 2019 - Jul. 2021
 
 
-awards:
-- name: Award Name 2
-  date: 2024
-- name: Award Name 1 
-  date: 2021
-- name: A quick brown fox jumps over the lazy dog and runs away award
-  date: 2021
+# awards:
+# - name: Award Name 2
+#   date: 2024
+# - name: Award Name 1 
+#   date: 2021
+# - name: A quick brown fox jumps over the lazy dog and runs away award
+#   date: 2021
