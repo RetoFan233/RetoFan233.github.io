@@ -1,13 +1,13 @@
 <div class="row mt-3">
     <div class="col">
-        <div class="card border-0 shadow-sm bg-white">
+        <div class="card border-0 shadow-sm glass-card">
             <div class="card-body p-4">
 
                 <div class="row">
                     {% if site.data.profile.education %}
                     <div class="col-md-6">
                         <div class="mx-2 my-1">
-                            <h6>Education</h6>
+                            <h6 style="color: var(--accent-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.8rem;"><i class="fas fa-graduation-cap mr-1"></i> Education</h6>
                             <ul class="list-unstyled mb-1">
                                 {% for item in site.data.profile.education %}
                                 <li class="media mb-1">
@@ -31,7 +31,7 @@
                     {% if site.data.profile.awards %}
                     <div class="col-md-6">
                         <div class="mx-2 my-1">
-                            <h6>Honors & Awards</h6>
+                            <h6 style="color: var(--accent-secondary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.8rem;"><i class="fas fa-trophy mr-1"></i> Honors & Awards</h6>
                             <ul class="list small pl-3 mb-1">
                                 {% for item in site.data.profile.awards %}
                                 <li>
@@ -49,7 +49,7 @@
                     {% if site.data.profile.experience %}
                     <div class="col-md-6">
                         <div class="mx-2 my-1">
-                            <h6>Experience</h6>
+                            <h6 style="color: var(--accent-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.8rem;"><i class="fas fa-briefcase mr-1"></i> Experience</h6>
                             <ul class="list-unstyled mb-1">
                                 {% for item in site.data.profile.experience %}
                                 <li class="media mb-1">

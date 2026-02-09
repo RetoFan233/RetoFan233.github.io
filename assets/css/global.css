@@ -1,42 +1,364 @@
 @charset "utf-8";
-body {
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    padding-top: 5.0rem;
+
+/* ========================================
+   LIQUID GLASS THEME - Global Styles
+   ======================================== */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-bg-strong: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-border-strong: rgba(255, 255, 255, 0.4);
+    --glass-shadow: rgba(31, 38, 135, 0.15);
+    --glass-blur: 20px;
+    --glass-blur-strong: 30px;
+    --text-primary: #f0f0f5;
+    --text-secondary: rgba(240, 240, 245, 0.7);
+    --text-muted: rgba(240, 240, 245, 0.5);
+    --accent-primary: #7c83ff;
+    --accent-secondary: #a78bfa;
+    --accent-gradient: linear-gradient(135deg, #7c83ff 0%, #a78bfa 50%, #f472b6 100%);
+    --bg-gradient-1: #0f0c29;
+    --bg-gradient-2: #1a1147;
+    --bg-gradient-3: #24243e;
+    --card-radius: 20px;
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 400;
+    padding-top: 5.5rem;
+    color: var(--text-primary);
+    min-height: 100vh;
+    background: var(--bg-gradient-1);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body.bg-light {
+    background: var(--bg-gradient-1) !important;
+}
+
+/* Animated Gradient Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(120, 80, 220, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(100, 130, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(244, 114, 182, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+        linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 40%, var(--bg-gradient-3) 100%);
+    z-index: -2;
+    animation: bgShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgShift {
+    0% {
+        background-position: 0% 0%, 100% 0%, 50% 100%, 70% 60%, 0% 0%;
+    }
+    50% {
+        background-position: 30% 20%, 70% 40%, 30% 60%, 50% 30%, 0% 0%;
+    }
+    100% {
+        background-position: 60% 40%, 40% 60%, 60% 30%, 30% 70%, 0% 0%;
+    }
+}
+
+/* Floating Orbs */
+body::after {
+    content: '';
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 131, 255, 0.12) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    z-index: -1;
+    animation: floatOrb 15s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-80px, 120px) scale(1.1); }
+    66% { transform: translate(40px, 60px) scale(0.9); }
+    100% { transform: translate(-40px, 140px) scale(1.05); }
+}
+
+/* ========================================
+   Typography
+   ======================================== */
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 700;
+    color: var(--text-primary);
 }
+
+a {
+    color: var(--accent-primary);
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-secondary);
+    text-decoration: none;
+    text-shadow: 0 0 12px rgba(167, 139, 250, 0.4);
+}
+
+hr {
+    border-color: var(--glass-border);
+}
+
+/* ========================================
+   Liquid Glass Card Mixin (via class)
+   ======================================== */
+
+.glass-card,
+.card.border-0.shadow-sm,
+.card.border-0,
+.bg-white.shadow-sm,
+.bg-white {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border) !important;
+    border-radius: var(--card-radius) !important;
+    box-shadow:
+        0 8px 32px var(--glass-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    color: var(--text-primary);
+}
+
+/* Glass shimmer effect on hover */
+.glass-card::before,
+.card.border-0.shadow-sm::before,
+.bg-white.shadow-sm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.04),
+        transparent
+    );
+    transition: left 0.8s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glass-card:hover::before,
+.card.border-0.shadow-sm:hover::before,
+.bg-white.shadow-sm:hover::before {
+    left: 100%;
+}
+
+.glass-card:hover,
+.card.border-0.shadow-sm:hover,
+.bg-white.shadow-sm:hover {
+    background: var(--glass-bg-strong) !important;
+    border-color: var(--glass-border-strong) !important;
+    box-shadow:
+        0 12px 40px rgba(31, 38, 135, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Card body content stays above shimmer */
+.card-body,
+.glass-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   Navbar - Glass Style
+   ======================================== */
+
+.navbar {
+    opacity: 1;
+    background: rgba(15, 12, 41, 0.6) !important;
+    backdrop-filter: blur(var(--glass-blur-strong));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-smooth);
+    padding: 0.75rem 1rem;
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand strong {
+    color: var(--text-primary) !important;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: 1.3rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.navbar-light .navbar-nav .nav-item.active .nav-link {
+    color: var(--accent-primary) !important;
+    background: rgba(124, 131, 255, 0.12);
+}
+
+.navbar-light .navbar-toggler {
+    border-color: var(--glass-border);
+    color: var(--text-secondary);
+}
+
+.navbar-toggler i,
+.navbar-toggler {
+    color: var(--text-secondary) !important;
+}
+
+/* ========================================
+   Profile Card Enhancements
+   ======================================== */
 
 .text-profile-position {
     font-weight: 400;
+    color: var(--text-secondary);
 }
 
 .text-profile-bio {
-    /* font-family: "Raleway"; */
     font-weight: 400;
-}
-
-.navbar {
-    opacity: 0.95;
+    color: var(--text-secondary);
+    line-height: 1.7;
 }
 
 .inline-badge {
-    height: 16px;
-    vertical-align: -10%;
-    margin-right: 2px;
+    height: 18px;
+    vertical-align: -12%;
+    margin-right: 4px;
     line-break: unset;
+    filter: brightness(1.1);
 }
+
+.figure-img.img-thumbnail {
+    background: var(--glass-bg) !important;
+    border: 2px solid var(--glass-border) !important;
+    border-radius: 16px !important;
+    padding: 4px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.figure-img.img-thumbnail:hover {
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 0 25px rgba(124, 131, 255, 0.3);
+    transform: scale(1.03);
+}
+
+/* Social links */
+.card-body a.pr-3 {
+    color: var(--text-secondary) !important;
+    transition: var(--transition-smooth);
+    padding: 4px 12px 4px 0;
+    display: inline-block;
+}
+
+.card-body a.pr-3:hover {
+    color: var(--accent-primary) !important;
+    transform: translateY(-1px);
+}
+
+.card-body a.pr-3 i {
+    transition: var(--transition-smooth);
+}
+
+.card-body a.pr-3:hover i {
+    text-shadow: 0 0 12px rgba(124, 131, 255, 0.5);
+}
+
+/* ========================================
+   Text Color Overrides for Dark Theme
+   ======================================== */
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-body {
+    color: var(--text-primary) !important;
+}
+
+.small, small {
+    color: var(--text-secondary);
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+.h1, h1 {
+    color: var(--text-primary);
+}
+
+mark {
+    background: rgba(124, 131, 255, 0.2);
+    color: var(--text-secondary);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+/* ========================================
+   No Break & Utility
+   ======================================== */
 
 .no-break {
     white-space: nowrap;
 }
 
+/* ========================================
+   Publication Styles
+   ======================================== */
+
 .cover-image {
     width: 180px;
     max-height: 120px;
+    border-radius: 12px;
 }
 
 .abstract-body {
@@ -49,13 +371,427 @@ img.lazy {
     background-position: 50% 50%;
     background-size: 50px 50px;
     min-height: 80px;
+    border-radius: 12px;
 }
 
 .badge-publication {
     font-size: 100%;
 }
 
-.email-text {
-    font-family: Courier, monospace;
+/* Publication items */
+.border-bottom.border-gray,
+.border-top.border-gray {
+    border-color: var(--glass-border) !important;
 }
 
+.border-bottom {
+    border-color: var(--glass-border) !important;
+}
+
+/* ========================================
+   Email Text
+   ======================================== */
+
+.email-text {
+    font-family: "JetBrains Mono", "Fira Code", Courier, monospace;
+    font-size: 0.9em;
+    color: var(--accent-primary);
+}
+
+/* ========================================
+   News Card
+   ======================================== */
+
+.my-3.bg-white.shadow-sm.rounded-sm {
+    border-radius: var(--card-radius) !important;
+}
+
+/* News & Publication Card Headers */
+h6.p-3.mb-0.border-bottom,
+h6.border-bottom.border-gray {
+    color: var(--text-primary);
+    border-color: var(--glass-border) !important;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+h6.p-3.mb-0.border-bottom a,
+h6.border-bottom a {
+    color: var(--accent-primary);
+}
+
+/* ========================================
+   Publications Page
+   ======================================== */
+
+.rounded-sm {
+    border-radius: var(--card-radius) !important;
+}
+
+/* Year sidebar navigation */
+#navbar-year .nav-link {
+    color: var(--text-secondary);
+    border-radius: 10px;
+    padding: 6px 14px;
+    margin-bottom: 4px;
+    transition: var(--transition-smooth);
+}
+
+#navbar-year .nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+#navbar-year .nav-link.active {
+    color: #fff !important;
+    background: var(--accent-gradient) !important;
+    box-shadow: 0 4px 15px rgba(124, 131, 255, 0.3);
+}
+
+/* Publication year headers */
+h2.pt-4 {
+    color: var(--text-primary);
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* ========================================
+   Card overlays for mobile publication
+   ======================================== */
+
+.card-img-overlay {
+    background-color: rgba(15, 12, 41, 0.85) !important;
+    border-radius: var(--card-radius);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+
+.footer {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+.footer .text-muted {
+    color: var(--text-muted) !important;
+    font-size: 0.85rem;
+}
+
+/* ========================================
+   Button Styles
+   ======================================== */
+
+.btn-primary {
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: 12px;
+    padding: 8px 24px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px rgba(124, 131, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 131, 255, 0.4);
+}
+
+/* ========================================
+   Modal (WeChat QR Code etc.)
+   ======================================== */
+
+.modal-content {
+    background: rgba(15, 12, 41, 0.9) !important;
+    backdrop-filter: blur(var(--glass-blur-strong));
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--card-radius);
+    color: var(--text-primary);
+}
+
+.modal-footer {
+    border-color: var(--glass-border);
+}
+
+.modal-body {
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   Alert / Debug Message
+   ======================================== */
+
+.alert-warning {
+    background: rgba(255, 193, 7, 0.15) !important;
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(255, 193, 7, 0.3) !important;
+    border-radius: var(--card-radius) !important;
+    color: #ffc107;
+}
+
+.alert-warning code {
+    color: #fbbf24;
+    background: rgba(255, 193, 7, 0.1);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+/* ========================================
+   Scrollbar
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(124, 131, 255, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(124, 131, 255, 0.5);
+}
+
+/* ========================================
+   Selection
+   ======================================== */
+
+::selection {
+    background: rgba(124, 131, 255, 0.3);
+    color: #fff;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 4.5rem;
+    }
+
+    .card-body.p-5 {
+        padding: 1.5rem !important;
+    }
+
+    :root {
+        --card-radius: 16px;
+    }
+}
+
+/* ========================================
+   Floating Orbs - Additional Decorations
+   ======================================== */
+
+.floating-orbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.floating-orbs .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.15;
+    animation: orbFloat 20s ease-in-out infinite;
+}
+
+.floating-orbs .orb:nth-child(1) {
+    width: 400px;
+    height: 400px;
+    background: #7c83ff;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 25s;
+}
+
+.floating-orbs .orb:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    background: #a78bfa;
+    top: 60%;
+    right: 10%;
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+.floating-orbs .orb:nth-child(3) {
+    width: 350px;
+    height: 350px;
+    background: #f472b6;
+    bottom: 10%;
+    left: 30%;
+    animation-delay: -10s;
+    animation-duration: 22s;
+}
+
+.floating-orbs .orb:nth-child(4) {
+    width: 250px;
+    height: 250px;
+    background: #38bdf8;
+    top: 30%;
+    right: 30%;
+    animation-delay: -7s;
+    animation-duration: 18s;
+}
+
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, -60px) scale(1.1); }
+    50% { transform: translate(-30px, 40px) scale(0.95); }
+    75% { transform: translate(50px, 20px) scale(1.05); }
+}
+
+/* ========================================
+   Experience Card - List Item Styling
+   ======================================== */
+
+.media-body {
+    color: var(--text-secondary);
+}
+
+.media-body div:first-child {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.list.small li {
+    color: var(--text-secondary);
+}
+
+/* Education/Experience logos */
+.media img[style*="width: 18px"] {
+    filter: brightness(1.2);
+    border-radius: 3px;
+}
+
+/* ========================================
+   Link Styles in Cards
+   ======================================== */
+
+.abstract-links a {
+    color: var(--accent-primary) !important;
+    background: rgba(124, 131, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-right: 4px;
+    transition: var(--transition-smooth);
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.abstract-links a:hover {
+    background: rgba(124, 131, 255, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(124, 131, 255, 0.2);
+}
+
+/* CV Link */
+a[href*="cv"], a[href*="CV"] {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--accent-gradient);
+    color: #fff !important;
+    border-radius: 10px;
+    font-weight: 600;
+    -webkit-text-fill-color: #fff;
+    transition: var(--transition-smooth);
+}
+
+a[href*="cv"]:hover, a[href*="CV"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124, 131, 255, 0.4);
+}
+
+/* ========================================
+   Collapse Navbar (mobile)
+   ======================================== */
+
+.navbar-collapse {
+    background: transparent;
+}
+
+@media (max-width: 575.98px) {
+    .navbar-collapse {
+        background: rgba(15, 12, 41, 0.95);
+        backdrop-filter: blur(var(--glass-blur-strong));
+        -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+        border-radius: 16px;
+        padding: 12px;
+        margin-top: 8px;
+        border: 1px solid var(--glass-border);
+    }
+}
+
+/* ========================================
+   Container adjustments
+   ======================================== */
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   Badge styles (for news, publications)
+   ======================================== */
+
+.badge-primary {
+    background: var(--accent-gradient);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.badge-info {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+}
+
+.badge-success {
+    background: rgba(52, 211, 153, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    border-radius: 8px;
+}
+
+.badge-warning {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 8px;
+}
+
+/* ========================================
+   Tooltip
+   ======================================== */
+
+.tooltip-inner {
+    background: rgba(15, 12, 41, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.bs-tooltip-top .arrow::before {
+    border-top-color: rgba(15, 12, 41, 0.95);
+}

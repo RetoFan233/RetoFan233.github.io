@@ -1,10 +1,13 @@
 <div class="row">
     <div class="col">
-        <div class="card border-0 shadow-sm bg-white">
+        <div class="card border-0 shadow-sm glass-card">
             <div class="card-body p-5">
                 <div class="row">
                     <div class="col">
-                        <p class="h1 font-weight-normal">{{ site.data.profile.primary_name }} <small>{{ site.data.profile.secondary_name }}</small></p>
+                        <p class="h1 font-weight-normal" style="background: linear-gradient(135deg, #f0f0f5, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; letter-spacing: -0.02em;">
+                            {{ site.data.profile.primary_name }} 
+                            <small style="-webkit-text-fill-color: rgba(240,240,245,0.5);">{{ site.data.profile.secondary_name }}</small>
+                        </p>
                         <p class="text-profile-position">
                             {% for position in site.data.profile.positions %}
                             {% if position.logo -%}
@@ -57,7 +60,7 @@
                         {% endif %}
 
                         {% if site.data.profile.wechat_qrcode %}
-                        <a class="pr-3 no-break" data-toggle="modal" data-target="#modal-wechat">
+                        <a class="pr-3 no-break" data-toggle="modal" data-target="#modal-wechat" style="cursor: pointer;">
                             <i class="fab fa-weixin"></i> WeChat
                         </a>
                         {% endif %}
@@ -91,7 +94,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body p-0">
-                <img src="{{ site.data.profile.wechat_qrcode }}" class="img-fluid">
+                <img src="{{ site.data.profile.wechat_qrcode }}" class="img-fluid" style="border-radius: var(--card-radius) var(--card-radius) 0 0;">
             </div>
             {% if site.data.profile.wechat_prompt %}
             <div class="modal-body p-1">

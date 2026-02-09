@@ -1,17 +1,17 @@
 {% assign news_by_year = site.news | sort: "date" | reverse | limit: 3 | group_by_exp: "item", "item.date | date: '%Y'" -%}
 
-<div class="my-3 bg-white shadow-sm rounded-sm">
-    <h6 class="p-3 mb-0 border-bottom border-gray"><i class="fas fa-rss"></i> News</h6>
+<div class="my-3 glass-card" style="border-radius: var(--card-radius); overflow: hidden;">
+    <h6 class="p-3 mb-0 border-bottom" style="border-color: var(--glass-border) !important; color: var(--accent-primary); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.8rem;"><i class="fas fa-rss mr-1"></i> News</h6>
     <div class="px-3 pb-1">
         {% for year in news_by_year %}
-        <div class="media py-1 {% if not_first -%}border-top border-gray{%- endif %}">
+        <div class="media py-1 {% if not_first -%}border-top{%- endif %}" style="border-color: var(--glass-border) !important;">
             {% assign not_first = true %}
-            <div class="mr-3 text-muted my-1">{{ year.name }}</div>
+            <div class="mr-3 my-1" style="color: var(--accent-secondary); font-weight: 700; font-size: 0.95rem;">{{ year.name }}</div>
             <div class="media-body">
                 {% for item in year.items %}
                 <div class="my-1 d-flex">
-                    <div>{{ item.title }}</div>
-                    <div class="ml-auto mt-auto text-muted no-break"><i>{{ item.date | date: "%b %d" }}</i></div>
+                    <div style="color: var(--text-secondary);">{{ item.title }}</div>
+                    <div class="ml-auto mt-auto no-break" style="color: var(--text-muted);"><i>{{ item.date | date: "%b %d" }}</i></div>
                 </div>
                 {% endfor %}
             </div>
