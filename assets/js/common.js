@@ -31,7 +31,6 @@ $(function () {
         });
     }, observerOptions);
 
-    // Apply fade-in to cards
     document.querySelectorAll('.glass-card, .card.border-0, .row.mt-3 > .col > .card').forEach(function(el) {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -42,7 +41,8 @@ $(function () {
     // ========================================
     // iOS 26 Liquid Glass Droplet Lens Effect
     // ========================================
-    if (window.innerWidth > 768 && !('ontouchstart' in window)) {
+    var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (window.innerWidth > 768 && !isTouchDevice) {
         initLiquidDroplet();
     }
 
@@ -61,116 +61,76 @@ $(function () {
 });
 
 function initLiquidDroplet() {
-    var DROPLET_SIZE = 160;
-    var MAGNIFY = 1.35;
+    var SIZE = 150;
+    var HALF = SIZE / 2;
 
-    // Create the droplet DOM
+    // Create droplet element
     var droplet = document.createElement('div');
     droplet.id = 'liquid-droplet';
-    droplet.innerHTML = '<div class="droplet-content"></div><div class="droplet-shine"></div><div class="droplet-ring"></div>';
+    droplet.innerHTML = '<div class="droplet-shine"></div><div class="droplet-ring"></div>';
     document.body.appendChild(droplet);
 
-    var dropletContent = droplet.querySelector('.droplet-content');
-    var isVisible = false;
     var mouseX = -500, mouseY = -500;
-    var currentX = -500, currentY = -500;
-    var rafId = null;
-    var activeCard = null;
+    var posX = -500, posY = -500;
+    var isOverCard = false;
+    var visible = false;
+    var currentCard = null;
+    var hideTimer = null;
 
-    // All glass-card elements that react to the droplet
-    var cards = document.querySelectorAll('.glass-card, .card.border-0, .card-body');
-
-    // Smooth follow loop
-    function animate() {
-        // Ease towards mouse
-        currentX += (mouseX - currentX) * 0.15;
-        currentY += (mouseY - currentY) * 0.15;
-
-        droplet.style.transform = 'translate(' + (currentX - DROPLET_SIZE / 2) + 'px, ' + (currentY - DROPLET_SIZE / 2) + 'px)';
-
-        // Update the magnified clone position
-        if (activeCard && isVisible) {
-            updateMagnifiedContent(activeCard);
-        }
-
-        rafId = requestAnimationFrame(animate);
+    function loop() {
+        // Smooth easing
+        posX += (mouseX - posX) * 0.13;
+        posY += (mouseY - posY) * 0.13;
+        droplet.style.left = (posX - HALF) + 'px';
+        droplet.style.top = (posY - HALF) + 'px';
+        requestAnimationFrame(loop);
     }
+    requestAnimationFrame(loop);
 
-    function updateMagnifiedContent(card) {
-        var cardRect = card.getBoundingClientRect();
-
-        // Where the droplet center is relative to the card
-        var relX = currentX - cardRect.left;
-        var relY = currentY - cardRect.top;
-
-        // The magnified view origin (offset so it centers on cursor position)
-        var originX = (relX / cardRect.width) * 100;
-        var originY = (relY / cardRect.height) * 100;
-
-        dropletContent.style.transformOrigin = originX + '% ' + originY + '%';
-        dropletContent.style.transform = 'scale(' + MAGNIFY + ')';
-
-        // Position the cloned content so the magnified area aligns with cursor
-        var offsetX = -(relX * MAGNIFY - DROPLET_SIZE / 2);
-        var offsetY = -(relY * MAGNIFY - DROPLET_SIZE / 2);
-
-        dropletContent.style.left = offsetX + 'px';
-        dropletContent.style.top = offsetY + 'px';
-        dropletContent.style.width = cardRect.width + 'px';
-        dropletContent.style.height = cardRect.height + 'px';
-    }
-
-    function showDroplet(card) {
-        if (activeCard === card && isVisible) return;
-        activeCard = card;
-        isVisible = true;
-
-        // Clone the card content into the droplet
-        dropletContent.innerHTML = '';
-        var clone = card.cloneNode(true);
-        clone.style.cssText = 'width:100%;height:100%;margin:0;padding:' + 
-            window.getComputedStyle(card).padding + 
-            ';background:transparent !important;border:none !important;box-shadow:none !important;' +
-            'backdrop-filter:none !important;-webkit-backdrop-filter:none !important;' +
-            'overflow:visible;position:relative;border-radius:0 !important;pointer-events:none;';
-        
-        // Fix text colors in clone for readability
-        clone.querySelectorAll('*').forEach(function(el) {
-            el.style.pointerEvents = 'none';
-        });
-
-        dropletContent.appendChild(clone);
+    function show() {
+        if (visible) return;
+        visible = true;
+        clearTimeout(hideTimer);
         droplet.classList.add('active');
     }
 
-    function hideDroplet() {
-        isVisible = false;
-        activeCard = null;
-        droplet.classList.remove('active');
-        dropletContent.innerHTML = '';
+    function hide() {
+        if (!visible) return;
+        visible = false;
+        currentCard = null;
+        hideTimer = setTimeout(function() {
+            droplet.classList.remove('active');
+        }, 60);
     }
 
-    // Event listeners
+    function findCard(x, y) {
+        // Temporarily hide droplet so elementFromPoint finds actual content beneath
+        var prev = droplet.style.display;
+        droplet.style.display = 'none';
+        var el = document.elementFromPoint(x, y);
+        droplet.style.display = prev;
+        if (!el) return null;
+        var card = el.closest('.glass-card');
+        if (card && !card.closest('.navbar') && !card.closest('.modal')) {
+            return card;
+        }
+        return null;
+    }
+
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
 
-        // Check if hovering over a card
-        var target = document.elementFromPoint(e.clientX, e.clientY);
-        if (!target) { hideDroplet(); return; }
-
-        var card = target.closest('.glass-card, .card.border-0');
-        if (card && !card.closest('.navbar') && !card.closest('.modal')) {
-            showDroplet(card);
+        var card = findCard(e.clientX, e.clientY);
+        if (card) {
+            currentCard = card;
+            show();
         } else {
-            hideDroplet();
+            hide();
         }
     });
 
     document.addEventListener('mouseleave', function() {
-        hideDroplet();
+        hide();
     });
-
-    // Start animation loop
-    rafId = requestAnimationFrame(animate);
 }
