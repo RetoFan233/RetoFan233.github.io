@@ -4,10 +4,11 @@ navbar_name: "Yuanting Fan"
 
 positions:
 # - name: Position without logo
-- logo: /assets/images/badges/xjtu_red.png
-  name: MSE, Xi'an Jiaotong University (2022)
+- logo: /assets/images/badges/youtu_lab.png
+  name: Researcher, Tencent Youtu Lab
 
-email: "retofan@stu.xjtu.edu.cn"
+email: "retofan@tencent.com"
+# email: "retofan@stu.xjtu.edu.cn"
 # cv_link: link-to-your-cv-file
 gscholar: SD4CZKAAAAAJ
 github: RetoFan233
@@ -19,7 +20,7 @@ github: RetoFan233
 # orcid: 0000-0000-0000-0000
 
 short_bio: >-
-  The student of Xi'an Jiaotong University. Major in Computer Vision; Super-Resolution; Generative Models; Multimodal Large Language Model; Anomaly Detection.
+  The researcher of Tencent Youtu Lab. Major in Computer Vision; Super-Resolution; Generative Models; Multimodal Large Language Model; Anomaly Detection; Anomaly Generation.
 
 portrait_url: /assets/images/photos/portrait.jpg
 # portrait_caption: >-
@@ -36,11 +37,11 @@ education:
   position: B.S. in Software Engineering
   date: Sep. 2018 - Jul. 2022
 
-# experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
+experience:
+- name: Tencent Youtu Lab
+  logo: /assets/images/badges/youtu_lab.png
+  position: Researcher
+  date: Jul. 2025 - 
 
 
 # awards:
