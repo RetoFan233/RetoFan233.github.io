@@ -9,7 +9,12 @@ positions:
 
 email: "retofan@tencent.com"
 # email: "retofan@stu.xjtu.edu.cn"
-# cv_link: link-to-your-cv-file
+# cv_link: https://drive.google.com/file/d/1ZEDsedIbEHabFyLuHzyIaRQ2YGl-H13Z/view?usp=sharing
+cv_links:
+  - name: "CV (中文)"
+    url: https://drive.google.com/file/d/1410bhQsgvNFJyutuVQTfPTIUKa9EBxgX/view?usp=sharing
+  - name: "CV (English)"
+    url: https://drive.google.com/file/d/1ZEDsedIbEHabFyLuHzyIaRQ2YGl-H13Z/view?usp=sharing
 gscholar: SD4CZKAAAAAJ
 github: RetoFan233
 # twitter: your_twitter_id
@@ -17,7 +22,7 @@ github: RetoFan233
 # wechat_prompt: >-
 #   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
 # linkedin: your_linkedin_id
-# orcid: 0000-0000-0000-0000
+orcid: 0009-0008-6507-666X
 
 short_bio: >-
   The researcher of Tencent Youtu Lab. Major in Computer Vision; Super-Resolution; Generative Models; Multimodal Large Language Model; Anomaly Detection; Anomaly Generation. Currently exploring Agent applications and cost-effective AI-generated short drama production. 
