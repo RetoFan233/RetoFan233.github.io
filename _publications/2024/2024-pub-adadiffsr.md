@@ -20,5 +20,6 @@ authors:
 links:
   # Code: https://github.com/luost26/academic-homepage
   # Unsplash: https://unsplash.com/photos/sliced-in-half-pineapple--_PLJZmHZzk
-  Paper: https://link.springer.com/chapter/10.1007/978-3-031-73254-6_23
+  Paper (Springer): https://link.springer.com/chapter/10.1007/978-3-031-73254-6_23
+  Paper (Arxiv): https://arxiv.org/pdf/2410.17752
 ---

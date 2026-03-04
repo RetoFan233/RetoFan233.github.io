@@ -2,7 +2,7 @@
 title:          "InstanceSR: Efficient Reconstructing Small Object with Differential Instance-level Super-Resolution"
 date:           2024-12-12 00:01:00 +0800
 selected:       true
-pub:            "IEEE TCSVT2024"
+pub:            "IEEE TCSVT2025"
 # pub_pre:        "Submitted to "
 # pub_post:       'Under review.'
 # pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'
@@ -19,5 +19,6 @@ authors:
 links:
   # Code: https://github.com/luost26/academic-homepage
   # Unsplash: https://unsplash.com/photos/sliced-in-half-pineapple--_PLJZmHZzk
-  Paper: https://ieeexplore.ieee.org/abstract/document/10750855
+  Paper (IEEE): https://ieeexplore.ieee.org/abstract/document/10750855
+  Paper (Google Scholar): https://drive.google.com/file/d/1QcriaYls2zDOU2dzNtiXm1HwLBorvej-/view
 ---
