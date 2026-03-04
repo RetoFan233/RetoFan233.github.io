@@ -42,14 +42,18 @@ education:
 experience:
 - name: Tencent Youtu Lab
   logo: /assets/images/badges/youtu_lab.png
+  position: Research Intern
+  date: Apr. 2024 - Sep. 2024
+
+- name: Tencent Youtu Lab
+  logo: /assets/images/badges/youtu_lab.png
   position: Researcher
   date: Jul. 2025 - 
 
 
-# awards:
-# - name: Award Name 2
-#   date: 2024
-# - name: Award Name 1
-#   date: 2021
-# - name: A quick brown fox jumps over the lazy dog and runs away award
-#   date: 2021
+awards:
+- name: First Prize, Northwest Region, China Graduate Student Electronic Design Competition
+  date: 2023
+- name: Third Prize, China Software Cup National Competition
+  date: 2021
+
