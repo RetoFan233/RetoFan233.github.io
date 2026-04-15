@@ -23,4 +23,5 @@ authors:
 links:
   Paper (Elsevier): https://doi.org/10.1016/j.patcog.2026.113316
   Paper (arXiv): https://arxiv.org/pdf/2510.26464
+  Code: https://github.com/RetoFan233/FineGrainedAD
 ---
