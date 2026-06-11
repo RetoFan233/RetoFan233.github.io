@@ -3,6 +3,7 @@ title:          "Large-Scale Universal Defect Generation: Foundation Models and 
 date:           2026-4-10 00:01:00 +0800
 selected:       true
 pub:            "arXiv"
+type:            "preprint"
 pub_pre:        "Preprint, "
 # pub_post:       'Under review.'
 # pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'

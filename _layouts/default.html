@@ -5,6 +5,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ page.title }} - {{ site.data.profile.navbar_name }}</title>
+    <meta name="description" content="{{ site.data.profile.short_bio | strip_html | strip_newlines | truncate: 160 }}">
+    <meta name="theme-color" content="#f5f4ed" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="{{ '/assets/images/etc/favicon.svg' | relative_url }}" type="image/svg+xml">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page.title }} - {{ site.data.profile.navbar_name }}">
+    <meta property="og:description" content="{{ site.data.profile.short_bio | strip_html | strip_newlines | truncate: 160 }}">
+    <meta property="og:image" content="{{ site.data.profile.portrait_url | absolute_url }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta name="twitter:card" content="summary">
+
+    <!-- Apply saved theme before first paint to avoid flashing -->
+    <script>
+        (function () {
+            var saved = null;
+            try { saved = localStorage.getItem('theme'); } catch (e) {}
+            var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous" />
@@ -22,6 +44,10 @@
         {{content}}
     </div>
     {% include footer.html %}
+
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

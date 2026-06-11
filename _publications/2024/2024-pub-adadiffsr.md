@@ -3,6 +3,7 @@ title:          "AdaDiffSR: Adaptive Region-aware Dynamic Acceleration Diffusion
 date:           2024-7-12 00:01:00 +0800
 selected:       true
 pub:            "ECCV2024"
+type:            "conference"
 # pub_pre:        "Submitted to "
 # pub_post:       'Under review.'
 # pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'

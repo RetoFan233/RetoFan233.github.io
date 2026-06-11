@@ -3,6 +3,7 @@ title:          "Towards Fine-Grained Vision-Language Alignment for Few-Shot Ano
 date:           2026-2-27 00:01:00 +0800
 selected:       true
 pub:            "Pattern Recognition"
+type:            "journal"
 # pub_pre:        "Submitted to "
 # pub_post:       'Under review.'
 # pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'

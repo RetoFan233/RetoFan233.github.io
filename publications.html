@@ -7,17 +7,38 @@ body_attr: >-
 ---
 
 {% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
+{% assign n_all = site.publications | size %}
+{% assign n_journal = site.publications | where: "type", "journal" | size %}
+{% assign n_conference = site.publications | where: "type", "conference" | size %}
+{% assign n_preprint = site.publications | where: "type", "preprint" | size %}
 
 <div class="row">
     <div class="col-12 col-lg-10">
-        {% for year in pubs_by_year %}
-        {% assign num_papers = year.items | size %}
-        <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
-        <div class="my-0 p-0 glass-card" style="border-radius: var(--card-radius); overflow: hidden;">
-            {% for item in year.items %}
-                {% include widgets/publication_item.html item=item %}
-            {% endfor %}
+
+        <div class="pub-filter pt-4" role="group" aria-label="Filter publications by type">
+            <button type="button" class="pub-filter-btn active" data-filter="all">All <span class="pub-filter-count">{{ n_all }}</span></button>
+            {% if n_journal > 0 %}
+            <button type="button" class="pub-filter-btn" data-filter="journal">Journal <span class="pub-filter-count">{{ n_journal }}</span></button>
+            {% endif %}
+            {% if n_conference > 0 %}
+            <button type="button" class="pub-filter-btn" data-filter="conference">Conference <span class="pub-filter-count">{{ n_conference }}</span></button>
+            {% endif %}
+            {% if n_preprint > 0 %}
+            <button type="button" class="pub-filter-btn" data-filter="preprint">Preprint <span class="pub-filter-count">{{ n_preprint }}</span></button>
+            {% endif %}
         </div>
+
+        {% for year in pubs_by_year %}
+        <section class="pub-year-section" data-year="{{ year.name }}">
+            <h2 class="pt-3" id="year-{{ year.name }}">{{ year.name }}</h2>
+            <div class="my-0 p-0 glass-card" style="border-radius: var(--card-radius); overflow: hidden;">
+                {% for item in year.items %}
+                <div class="pub-item" data-pub-type="{{ item.type | default: 'other' }}">
+                    {% include widgets/publication_item.html item=item %}
+                </div>
+                {% endfor %}
+            </div>
+        </section>
         {% endfor %}
     </div>
 
