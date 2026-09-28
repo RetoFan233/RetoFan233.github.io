@@ -4,7 +4,7 @@ date:           2026-4-10 00:01:00 +0800
 selected:       true
 pub:            "NeurIPS"
 type:            "conference"
-pub_pre:        "Accepted at "
+# pub_pre:        "Accepted at "
 # pub_post:       'Under review.'
 # pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'
 pub_date:       "2026"
