@@ -1,5 +1,5 @@
 ---
-title:          "Large-Scale Universal Defect Generation: Foundation Models and Datasets"
+title:          "UniDG: Unified Defect Generation via Defect-Context Editing"
 date:           2026-4-10 00:01:00 +0800
 selected:       true
 pub:            "NeurIPS"
@@ -10,7 +10,7 @@ type:            "conference"
 pub_date:       "2026"
 
 abstract: >-
-  Existing defect/anomaly generation methods often rely on few-shot learning, which overfits to specific defect categories due to the lack of large-scale paired defect editing data. This issue is aggravated by substantial variations in defect scale and morphology, resulting in limited generalization, degraded realism, and category consistency. We address these challenges by introducing UDG, a large-scale dataset of 300K normal-abnormal-mask-caption quadruplets spanning diverse domains, and by presenting UniDG, a universal defect generation foundation model that supports both reference-based defect generation and text instruction-based defect editing without per-category fine-tuning. UniDG performs Defect-Context Editing via adaptive defect cropping and structured diptych input format, and fuses reference and target conditions through MM-DiT multimodal attention. A two-stage training strategy, Diversity-SFT followed by Consistency-RFT, further improves diversity while enhancing realism and reference consistency. Extensive experiments on MVTec-AD and VisA show that UniDG outperforms prior few-shot anomaly generation and image insertion/editing baselines in synthesis quality and downstream single- and multi-class anomaly detection/localization.
+  Generating realistic visual defects is crucial for alleviating the scarcity of abnormal samples in anomaly detection, yet existing methods often rely on category-specific few-shot adaptation and struggle to generalize across objects, defect types, and domains. This limitation stems in part from the lack of paired defect editing data and the fine-grained nature of defect appearance, where subtle variations in scale, texture, and morphology must be preserved while maintaining consistency with the target scene. To address this challenge, we introduce UDG, a dataset of 300K normal-abnormal-mask-caption quadruplets curated from diverse defect-related scenarios, and present UniDG, a unified defect generation model. UniDG formulates defect synthesis as Defect-Context Editing: it extracts reference defect context with adaptive cropping, organizes reference and target inputs in a structured diptych format, and fuses multimodal conditions through MM-DiT attention. We further develop a two-stage training strategy: Diversity-SFT learns diverse transferable defect priors from paired editing data, while optional Consistency-RFT can further improve reference adherence, local realism, and defect-category consistency. Without per-category fine-tuning or using MVTec-AD/VisA for training, UniDG outperforms prior few-shot anomaly generation and image insertion/editing baselines in both synthesis quality and downstream single- and multi-class anomaly detection/localization.
 cover:          assets/images/covers/overview_unidg.png
 authors:
   - Yuanting Fan
